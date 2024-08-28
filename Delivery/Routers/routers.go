@@ -25,7 +25,7 @@ func Routers(server *gin.Engine, db *infrastructure.Db, config *infrastructure.C
 
 	userControllers := controllers.NewUserControllers(user_useCase)
 
-	adminControllers := controllers.NewAdminControllers(admin_useCase)
+	adminControllers := controllers.NewAdminControllers(admin_useCase, loan_usecase)
 
 	loan_controller := controllers.NewLoanControllers(loan_usecase)
 	
@@ -41,6 +41,8 @@ func Routers(server *gin.Engine, db *infrastructure.Db, config *infrastructure.C
 	adminRoute := server.Group("admin")
 	adminRoute.GET("/users", authMiddleWare, adminControllers.GetAllUsers)
 	adminRoute.DELETE("/users/:id", authMiddleWare, adminControllers.DeleteUser)
+	adminRoute.GET("/loans", authMiddleWare, adminControllers.GetAllLoans)
+	
 	
 	
 	auth := server.Group("users")
@@ -50,6 +52,7 @@ func Routers(server *gin.Engine, db *infrastructure.Db, config *infrastructure.C
 
 	loanRoute := server.Group("loans")
 	loanRoute.POST("", authMiddleWare, loan_controller.CreateLoan)
+	loanRoute.GET("/:id", authMiddleWare, loan_controller.CheckLoanStatus)
 
 
 	tokenGroup := server.Group("token")

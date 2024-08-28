@@ -43,6 +43,7 @@ func (ar *AdminRepository) GetAllUsers(pageNo, pageSize int64) ([]domain.User, e
 	return users, nil
 }
 
+
 func (ar *AdminRepository) DeleteUser(id string) error{
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
