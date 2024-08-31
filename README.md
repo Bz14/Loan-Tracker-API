@@ -155,6 +155,30 @@ The API uses JWT (JSON Web Tokens) for authenticating and authorizing users. Acc
 - **Access Token**: Short-lived token used to access protected resources.
 - **Refresh Token**: Long-lived token used to obtain a new access token.
 
+### 2.2 Loan Management
+
+#### Apply for Loan
+
+- **Endpoint:** `POST /loans`
+- **Description:** Submit a loan application.
+- **Response:** Loan application status.
+
+#### View Loan Status
+
+- **Endpoint:** `GET /loans/{id}`
+- **Description:** Retrieve the status of a specific loan of the current user.
+- **Response:** Loan status details.
+
+#### View All Loans (Admin)
+
+- **Endpoint:** `GET /admin/loans`
+- **Description:** Retrieve all loan applications.
+- **Response:** List of loan applications.
+- **Parameters:**
+  - `status`: `pending` | `approved` | `rejected` (optional, default: all)
+  - `order`: `asc` | `desc` (optional, default: `asc` for pending, `desc` for reviewed)
+
+
 ## Postman Documentation
 
 A Postman collection has been provided for testing the API endpoints. You can import the collection into Postman and use it to interact with the API.
